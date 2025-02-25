@@ -40,7 +40,7 @@ static void	validargcheck(char *argv)
 	}
 	return ;
 }
-
+// change atoi to atol
 int	main(int argc, char **argv)
 {
 	int				argcounter;

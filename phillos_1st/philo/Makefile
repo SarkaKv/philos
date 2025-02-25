@@ -14,7 +14,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -I$(SRC_DIR) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(NAME)
 
 fclean: clean
 	rm -f $(NAME)

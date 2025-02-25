@@ -12,13 +12,36 @@
 
 #include "philo.h" 
 
-void startspaghettiparty(myphilonumbers *philos)
+void philosophersareborn(myphilonumbers *philos)
 {
-    p_thread myphilo;
+    int *philoid;
+    pthread_t myphilo[philos->numberofphilos];
     philos->numberofforks = philos->numberofphilos;
     while(philos->numberofphilos > 0)
     {
-        pthread_create(myphilo, NULL, takefork,philos);
+        philoid = malloc(sizeof(int));
+        *philoid = philos->numberofphilos;
+        pthread_create(myphilo, NULL,  ,philos->numberofphilos);
         philos->numberofphilos--;
     }
+
+}
+
+// each phillo a seperate thread - create them mutex the fork - ODD can start with sleep even can start by taking forkies. 
+void startspaghettiparty(myphilonumbers *philos)
+{
+    gettimeofday(&philos->start_time, NULL);
+    printmyclock(philos);
+    philosophersareborn(philos);
+       int *philoid;
+    pthread_t myphilo[philos->numberofphilos];
+    philos->numberofforks = philos->numberofphilos;
+    while(philos->numberofphilos > 0)
+    {
+        philoid = malloc(sizeof(int));
+        *philoid = philos->numberofphilos;
+        pthread_create(myphilo, NULL,  ,philos->numberofphilos);
+        philos->numberofphilos--;
+    }
+
 }
