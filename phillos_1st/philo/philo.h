@@ -44,7 +44,15 @@ typedef struct myphilonumbers
     struct timeval start_time;
     struct timeval current_time;
     int eatsleepdie;
+    pthread_mutex_t forklock;
 }   myphilonumbers;
+
+typedef struct data_philos
+{
+    int philoid;
+    struct timeval eating;
+    myphilonumbers *philos;
+}   data_philos;
 
 int myatoi(char *str);
 // correct time checking

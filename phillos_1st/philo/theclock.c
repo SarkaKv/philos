@@ -66,5 +66,5 @@ void	printmyclock(myphilonumbers *philos)
 	}
 	ltoa(elapsedtimeinms, lenghtofthetimer, to_print);
 	write(1, to_print, lenghtofthetimer);
-    write(1, " start of simulation", 22);
+	write(1, " ", 1);
 }
