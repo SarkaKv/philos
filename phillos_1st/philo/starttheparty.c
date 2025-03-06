@@ -48,7 +48,7 @@ void* philoroutine(void *arg)
     }
     return NULL;
 }
-
+//malloc mutexes, mutex to the actual phillo struct, protect bith forks by mutexes, wrap forks for correct fork taking
 void startspaghettiparty(myphilonumbers *philos)
 {
     gettimeofday(&philos->start_time, NULL);
