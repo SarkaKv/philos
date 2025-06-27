@@ -65,6 +65,7 @@ void	printmyclock(myphilonumbers *philos)
 		exit(0);
 	}
 	ltoa(elapsedtimeinms, lenghtofthetimer, to_print);
-	write(1, to_print, lenghtofthetimer);
-	write(1, " ", 1);
+	printf("%ld    ", elapsedtimeinms);
+	// write(1, to_print, lenghtofthetimer);
+	// write(1, " ", 1);
 }

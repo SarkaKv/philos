@@ -44,13 +44,20 @@ typedef struct myphilonumbers
     struct timeval start_time;
     struct timeval current_time;
     int eatsleepdie;
-    pthread_mutex_t forklock;
+    pthread_mutex_t *forklocker;
 }   myphilonumbers;
+
+// typedef struct timer
+// {
+    
+// }
+
 
 typedef struct data_philos
 {
     int philoid;
     struct timeval eating;
+
     myphilonumbers *philos;
 }   data_philos;
 
@@ -60,5 +67,8 @@ int	countlenght(long lenghtoffuturestr);
 void printmyclock(myphilonumbers *philos);
 char	*ltoa(long number, int lenght, char *str);
 void startspaghettiparty(myphilonumbers *philos);
+void	ft_putchar(char c);
+void	ft_putnbr(int n);
+void	ft_putstr(char *s);
 
 #endif

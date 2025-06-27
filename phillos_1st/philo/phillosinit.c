@@ -12,19 +12,6 @@
 
 #include "philo.h"
 
-int	myatoi(char *str)
-{
-	int	results;
-
-	results = 0;
-	while (*str)
-	{
-		results = results * 10 + (*str - '0');
-		str++;
-	}
-	return (results);
-}
-
 static void	validargcheck(char *argv)
 {
 	int	i;
