@@ -78,6 +78,7 @@ void startspaghettiparty(myphilonumbers *philos)
     pthread_t myphilo[nphillos];
     philos->numberofforks = philos->numberofphilos;
     philos->forklocker = malloc(sizeof(pthread_mutex_t) * philos->numberofphilos);
+    //waiter should be here, also initiate philosopher pre calling create thread.
     while(forklockingmutex < nphillos)
     {
         pthread_mutex_init(&philos->forklocker[forklockingmutex], NULL);
