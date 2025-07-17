@@ -27,9 +27,9 @@ void think(data_philos *philosopher)
 
 void eatspaghetti(data_philos **forkslifted)
 {
-    printmyclock()
+    printmyclock((*forkslifted)->philos);
     printf("%d is eating\n", (*forkslifted)->philoid);
-    usleep(200000);
+
 }
 
 void takefork(data_philos *forklift)
@@ -39,14 +39,14 @@ void takefork(data_philos *forklift)
     // if(forkchecker(&forklift) == false)
     // {
     //     return;
-    // } 
+    // }
     pthread_mutex_lock(&forklift->philos->forklocker[leftfork]);
     pthread_mutex_lock(&forklift->philos->forklocker[rightfork]);
     printmyclock(forklift->philos);
     printf("\033[31m%d has taken forks %d and %d\033[0m\n", forklift->philoid, leftfork, rightfork);
     eatspaghetti(&forklift);
     usleep(20000);
-    printf("\033[34m%d is done eating\n", forklift->philoid);
+    // printf("\033[34m%d is done eating\n", forklift->philoid);
     pthread_mutex_unlock(&forklift->philos->forklocker[leftfork]);
     pthread_mutex_unlock(&forklift->philos->forklocker[rightfork]);
     return;
@@ -56,13 +56,25 @@ void* philoroutine(void *arg)
 {
     int test = 4;
     data_philos *data = (data_philos*)arg;
-    printf("\033[32mcurrentphilo: %d\033[0m\n", data->philoid);
+    // printf("\033[32mcurrentphilo: %d\033[0m\n", data->philoid);
+    if(data->philoid == 1)
+    {
+        theydie(data);
+    }
     while(test>0)
     {
         if(data->philoid % 2 == 0)
+        {
             think(data);
+            usleep(200000);
+            takefork(data);
+        }
+        else
+        {
         takefork(data);
+        usleep(20000);
         think(data);
+        }
         test--;
     }
     return NULL;
@@ -78,7 +90,7 @@ void startspaghettiparty(myphilonumbers *philos)
     pthread_t myphilo[nphillos];
     philos->numberofforks = philos->numberofphilos;
     philos->forklocker = malloc(sizeof(pthread_mutex_t) * philos->numberofphilos);
-    //waiter should be here, also initiate philosopher pre calling create thread.
+    // waiter(philos);
     while(forklockingmutex < nphillos)
     {
         pthread_mutex_init(&philos->forklocker[forklockingmutex], NULL);
@@ -94,4 +106,12 @@ void startspaghettiparty(myphilonumbers *philos)
         philoid++;
     }
     usleep(20000000);
+}
+
+void theydie(data_philos *philosopher)
+{
+    think(philosopher);
+    usleep(philosopher->philos->time_to_die);
+    printmyclock(philosopher->philos);
+    printf("%d died\n", philosopher->philoid);
 }
