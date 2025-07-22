@@ -31,7 +31,7 @@ static void	validargcheck(char *argv)
 int	main(int argc, char **argv)
 {
 	int				argcounter;
-	myphilonumbers	philos;
+	table tableset;
 
 	if (argc < 5 || argc > 6)
 		return (0);
@@ -43,14 +43,14 @@ int	main(int argc, char **argv)
 	}
 	if (argc >= 5)
 	{
-		philos.numberofphilos = myatoi(argv[1]);
-		philos.time_to_die = myatoi(argv[2]);
-		philos.time_to_eat = myatoi(argv[3]);
-		philos.time_to_sleep = myatoi(argv[4]);
-		philos.must_eat = -1;
+		tableset.philos->numberofphilos = myatoi(argv[1]);
+		tableset.philos->time_to_die = myatoi(argv[2]);
+		tableset.philos->time_to_eat = myatoi(argv[3]);
+		tableset.philos->time_to_sleep = myatoi(argv[4]);
+		tableset.philos->must_eat = -1;
 	}
 	if (argc == 6)
-		philos.must_eat = myatoi(argv[5]);
-	startspaghettiparty(&philos);
+		tableset.philos->must_eat = myatoi(argv[5]);
+	startspaghettiparty(&tableset);
 	return (0);
 }

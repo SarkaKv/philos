@@ -31,45 +31,58 @@
 #define THIN_MSG " is thinking\n"
 #define THINK_MSG_L (sizeof(THINK_MSG) - 1)
 
+typedef struct waiter
+{
+    int isforkfree;
 
+}   waiter;
+
+typedef struct forks
+{
+    int numberofforks;
+    pthread_mutex_t *forklocker;
+}   forks;
 
 typedef struct myphilonumbers
 {
     int numberofphilos;
-    int numberofforks;
     int time_to_die;
     int time_to_sleep;
     int time_to_eat;
     int must_eat;
-    struct timeval start_time;
-    struct timeval current_time;
     int eatsleepdie;
-    pthread_mutex_t *forklocker;
 }   myphilonumbers;
 
-// typedef struct timer
-// {
-    
-// }
-
-
-typedef struct data_philos
+typedef struct table
 {
-    int philoid;
+    myphilonumbers *philos;
+    waiter *waiter;
+    forks *forks;
+    struct timeval start_time;
+    struct timeval current_time;
     struct timeval eating;
 
-    myphilonumbers *philos;
-}   data_philos;
+}   table;
+
+typedef struct onephilo
+{
+    int philoid;
+    table *sharedtable;
+} onephilo;
+
 
 int myatoi(char *str);
 // correct time checking
 int	countlenght(long lenghtoffuturestr);
-void printmyclock(myphilonumbers *philos);
+void printmyclock(table *philos);
 char	*ltoa(long number, int lenght, char *str);
-void startspaghettiparty(myphilonumbers *philos);
+void startspaghettiparty(table *philos);
 void	ft_putchar(char c);
 void	ft_putnbr(int n);
 void	ft_putstr(char *s);
-void theydie(data_philos *philosopher);
+// void theydie(onephilo *philosopher);
+
+
+// prekopat structy -> stul s odkazem na phillos a na cisnika.
 
 #endif
